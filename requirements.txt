@@ -1,6 +1,10 @@
 streamlit
+requests
+pillow
 torch
 torchvision
 ultralytics
-Pillow
-numpy
+fastapi
+uvicorn
+python-multipart
+opencv-python-headless
