@@ -21,36 +21,16 @@ custom_css = """
         background-color: #4d5654;
         color: black;
     }
-    .hero-container {
-        position: relative;
-        height: 400px;
-        overflow: hidden;
-        border-radius: 1rem;
+    .hero-text {
+        text-align: center;
         margin-bottom: 2rem;
     }
-    .hero-video {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        z-index: 0;
-        transform: translate(-50%, -50%);
-        opacity: 0.4;
-    }
-    .hero-text {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        color: white;
-        padding-top: 6rem;
-    }
     .hero-text h1 {
-        font-size: 4.5rem;
+        font-size: 5rem;
         font-weight: bold;
-        color: #003366;
+        background: linear-gradient(90deg, red, blue, green);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .hero-text h3 {
         font-size: 1.5rem;
@@ -89,23 +69,17 @@ custom_css = """
         border-radius: 0.5rem;
         font-weight: bold;
     }
-    .reduced-img {
-        max-width: 400px;
-        margin: 1rem auto;
-        display: block;
-    }
 </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# --- Hero Section with Video Background ---
+# --- Hero Section with Colorful Heading ---
 st.markdown("""
-<h3 style='color:white; text-align:center;'>🎥 Live Demo: FaultyLens in Action</h3>
-<iframe width="720" height="405" src="https://www.youtube.com/embed/FNSACEFzkMY" 
-frameborder="0" allowfullscreen style="display: block; margin: auto; border-radius: 10px;"></iframe>
+<div class="hero-text">
+    <h1>Faulty Lens</h1>
+    <h3>The eye that never misses</h3>
+</div>
 """, unsafe_allow_html=True)
-
-
 
 # --- "Why FaultyLens?" Section ---
 st.markdown('<a name="why-faultylens"></a>', unsafe_allow_html=True)
