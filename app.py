@@ -137,14 +137,16 @@ if uploaded_file:
     img_bytes.seek(0)
 
     with st.spinner("Classifying and detecting..."):
-        response = requests.post(
-            "http://127.0.0.1:8000/analyze",
-            files={"file": ("image.jpg", img_bytes, "image/jpeg")}
-        )
+        try:
+            response = requests.post(
+                "http://127.0.0.1:8000/analyze",
+                files={"file": ("image.jpg", img_bytes, "image/jpeg")}
+            )
+        except requests.exceptions.ConnectionError:
+            st.error("❌ Could not connect to the backend server. Please ensure the FastAPI backend is running at http://127.0.0.1:8000.")
+            response = None
 
-        
-
-    if response.status_code == 200:
+    if response and response.status_code == 200:
         data = response.json()
         st.subheader("📌 Classification Result")
         st.markdown(f"<div class='classification-result'>🔎 Predicted Class: <strong>{data['classification'].upper()}</strong></div>", unsafe_allow_html=True)
@@ -155,7 +157,7 @@ if uploaded_file:
         st.subheader("🔍 Detected Boxes")
         for i, det in enumerate(data["detections"], 1):
             st.write(f"🟢 Class {det['class_id']} - Confidence: {det['confidence']:.2f}")
-    else:
+    elif uploaded_file and response is not None:
         st.error("❌ Error occurred while processing the image.")
 else:
     st.info("📅 Upload a solar panel image to begin analysis.")
